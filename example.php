@@ -2,8 +2,11 @@
 
 require './vendor/autoload.php';
 
-$twig = new Twig_Environment();
-$twig->addExtension(new Twig_Extension_HTMLHelpers());
+
+use Njh\TwigHTMLHelpers\HTMLHelpers;
+use Twig\Environment;
+use Twig\Loader\ArrayLoader;
+
 
 $string = <<<EOF
 <p>
@@ -62,9 +65,13 @@ $string = <<<EOF
 
 EOF;
 
-// Load the template from string
-$twig->setLoader(new Twig_Loader_String());
-$template = $twig->loadTemplate($string);
+$loader = new ArrayLoader(
+    ['test' => $string]
+);
+
+
+$twig = new Environment($loader);
+$twig->addExtension(new HTMLHelpers());
 
 // Render the template
-echo $template->render($_REQUEST);
+echo $twig->render('test');

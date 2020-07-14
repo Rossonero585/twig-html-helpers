@@ -1,11 +1,16 @@
 <?php
 
-class IntegrationTest extends Twig_Test_IntegrationTestCase
+namespace Njh\Tests;
+
+use Njh\TwigHTMLHelpers\HTMLHelpers;
+use Twig\Test\IntegrationTestCase;
+
+class IntegrationTest extends IntegrationTestCase
 {
     public function getExtensions()
     {
         return array(
-            new Twig_Extension_HTMLHelpers()
+            new HTMLHelpers()
         );
     }
 
